@@ -1,3 +1,8 @@
+// Jacob Reeder
+// CS 318
+
+// this is a class for creating a stack of integers.
+
 package Homework1;
 
 public class StackOfIntegers {
