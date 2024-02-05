@@ -145,7 +145,7 @@ public class GraphOfCities {
                 int current = stack.pop();
                 System.out.print(vertices.get(current) + " ");
 
-                for (int i = 0; i < vertices.size(); i++) {
+                for (int i = vertices.size()-1 ; i >= 0; i--) {
                     if (edges[current][i] > 0 && !visited[i]) {
                         stack.push(i);
                         visited[i] = true;
