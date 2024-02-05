@@ -1,6 +1,8 @@
 package Homework2;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Stack;
 
 public class GraphOfCities {
 
@@ -72,12 +74,12 @@ public class GraphOfCities {
 
     // Connects an edge from one city to another
     public void addEdge(String fromCity, String toCity, int distance) {
-        int fromIndex = vertices.indexOf(fromCity);
-        int toIndex = vertices.indexOf(toCity);
+        int from = vertices.indexOf(fromCity);
+        int to = vertices.indexOf(toCity);
 
-        if (fromIndex >= 0 && toIndex >= 0 ) {
-            edges[fromIndex][toIndex] = distance;
-            edges[toIndex][fromIndex] = distance;
+        if (from >= 0 && to >= 0 ) {
+            edges[from][to] = distance;
+            edges[to][from] = distance;
         }
     }
 
@@ -119,47 +121,65 @@ public class GraphOfCities {
 
     // deletes an edge
     public void deleteEdge(String fromCity, String toCity) {
-        int fromIndex = vertices.indexOf(fromCity);
-        int toIndex = vertices.indexOf(toCity);
+        int from = vertices.indexOf(fromCity);
+        int to = vertices.indexOf(toCity);
 
-        if (fromIndex != -1 && toIndex != -1) {
-            edges[fromIndex][toIndex] = 0;
-            edges[toIndex][fromIndex] = 0;
+        if (from != -1 && to != -1) {
+            edges[from][to] = 0;
+            edges[to][from] = 0;
         }
     }
+
+    // Depth First Search
+    public void DFS(String startCity) {
+        //for making sure the method doesn't keep visiting the same vertices
+        boolean[] visited = new boolean[vertices.size()];
+        int start = vertices.indexOf(startCity);
+        Stack<Integer> stack = new Stack<>();
+
+        if (start >= 0) {
+            stack.push(start);
+            visited[start] = true;
+
+            while (!stack.isEmpty()) {
+                int current = stack.pop();
+                System.out.print(vertices.get(current) + " ");
+
+                for (int i = 0; i < vertices.size(); i++) {
+                    if (edges[current][i] > 0 && !visited[i]) {
+                        stack.push(i);
+                        visited[i] = true;
+                    }
+                }
+            }
+        }
+        System.out.println();
+    }
+
+    // Breadth First Search
+    public void BFS(String startCity) {
+        boolean[] visited = new boolean[vertices.size()];
+        int start = vertices.indexOf(startCity);
+        ArrayDeque<Integer> queue = new ArrayDeque<>();
+
+        if (start >= 0) {
+            queue.offer(start);
+            visited[start] = true;
+
+            while (!queue.isEmpty()) {
+                int current = queue.poll();
+                System.out.print(vertices.get(current) + " ");
+
+                for (int i = 0; i < vertices.size(); i++) {
+                    if (edges[current][i] > 0 && !visited[i]) {
+                        queue.offer(i);
+                        visited[i] = true;
+                    }
+                }
+            }
+        }
+        System.out.println();
+    }
+
 }
 
-//   public void BFS() {
-    //        /* This method performs Depth-First Traversal with the help of a helper method
-    //         * to print all of the vertices in the graph. If the graph is empty,
-    //         * the method simply returns with nothing printed.*/
-    //        if (isEmpty()) return;
-    //        ArrayList<String> visited = new ArrayList<String>();
-    //        System.out.print("Breadth-First Traversal: ");
-    //        System.out.print(this.cities.get(0) + ", ");
-    //        BFSHelper(visited, this.cities.get(0));
-    //        System.out.println();
-    //    } // end BFS
-    //    void BFSHelper(ArrayList<String> visited, String city) {
-    //        /* Recursive helper method for BFS. It uses a PriorityQueue data structure
-    //         * and for loops to print out all of the neighbors of the current vertex.
-    //         * For parameters, it takes in an ArrayList of visited cities, and the current vertex.*/
-    //        
-    //        PriorityQueue<String> q = new PriorityQueue<String>();
-    //        
-    //        int cityPos = this.cities.indexOf(city);
-    //        for (int row = 0; row < this.am.length; row++) {
-    //            
-    //            if ((this.am[row][cityPos] > 0) && (visited.indexOf(this.cities.get(row)) == -1)) {
-    //                
-    //                if (visited.indexOf(this.cities.get(row)) == -1) {
-    //                    System.out.print(this.cities.get(row) + ", ");
-    //                    visited.add(city);
-    //                    q.add(this.cities.get(row));
-    //                }
-    //            }
-    //        }
-    //        for (String str: q) {
-    //            BFSHelper(visited, str);
-    //        }
-    //    } // end BFSHelper

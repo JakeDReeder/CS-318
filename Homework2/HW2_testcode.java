@@ -61,13 +61,13 @@ public class HW2_testcode
 
         System.out.println("Updated Graph 1");
         graph1.printEdges();
-        System.out.println(" ");
+        System.out.println();
         graph1.printVertices();
         System.out.println('\n');
 
         System.out.println("Updated Graph 2");
         graph2.printEdges();
-        System.out.println(" ");
+        System.out.println();
         graph2.printVertices();
 
         graph1.deleteEdge("Columbia", "Charlotte");
