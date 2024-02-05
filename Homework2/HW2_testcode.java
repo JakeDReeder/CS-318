@@ -1,5 +1,7 @@
 package Homework2;
 
+import java.util.Arrays;
+
 public class HW2_testcode 
 { 
   
@@ -19,21 +21,36 @@ public class HW2_testcode
             {67, 152, 175, 95, 0}
         };
         GraphOfCities graph2 = new GraphOfCities(cities, distances); 
-  
+         
+        //Graph 1 tests
+        System.out.println("Graph 1");
         graph1.getSize();
+
+        System.out.print("Columbia Neighbors: ");
+        System.out.println(Arrays.toString(graph1.getNeighbors("Columbia")));
+        
+        System.out.print("Columbia Degree: ");
+        System.out.println(graph1.getDegree("Columbia"));
+
+        System.out.println("Graph Empty: " + graph1.isEmpty());
+        
+        System.out.println('\n');
+
+        //Graph 2 tests
+        System.out.println("Graph 2");
         graph2.getSize();
 
+        System.out.print("Columbia Neighbors: ");
+        System.out.println(Arrays.toString(graph2.getNeighbors("Columbia")));
 
-        graph1.getNeighbors("Columbia");
-        graph2.getNeighbors("Columbia");
-  
+        System.out.print("Columbia Degree: ");
+        System.out.println(graph2.getDegree("Columbia"));
 
-        graph1.getDegree("Columbia");
-        graph2.getDegree("Columbia");
+        System.out.println("Graph Empty: " + graph2.isEmpty());
 
-        graph1.isEmpty();
-        graph2.isEmpty();
+        System.out.println('\n');
 
+        // Update Graph 1
 
         graph1.addVertex("Florence");
         graph1.addVertex("Columbia");
@@ -42,18 +59,18 @@ public class HW2_testcode
         graph1.addEdge("Florence", "Charlotte", 106);
         graph1.addEdge("Columbia", "Charlotte", 80);
 
-
+        System.out.println("Updated Graph 1");
         graph1.printEdges();
+        System.out.println(" ");
         graph1.printVertices();
+        System.out.println('\n');
 
+        System.out.println("Updated Graph 2");
         graph2.printEdges();
+        System.out.println(" ");
         graph2.printVertices();
 
         graph1.deleteEdge("Columbia", "Charlotte");
-        graph1.deleteEdge("Columbia", "Charlotte");
-
-
-        graph2.deleteEdge("Columbia", "Charlotte");
         graph2.deleteEdge("Columbia", "Charlotte");
 
     } 
