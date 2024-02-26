@@ -1,3 +1,6 @@
+// Jacob Reeder
+// CS 318 - Homework 3
+
 package Homework3;
 
 public class HashTable<Key, Value> {
